@@ -13,7 +13,7 @@ Baza danych wraz z odpowiednimi zasobami została utworzona w oparciu o instrukc
 
 #### Krok 3: Połączenie z bazą danych.
 W tym celu z poziomu strony głównej bazy danych, należało przejśc do przeglądu (1) oraz parametrów połączeń (2).  
-![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/9d8080ec-5774-4965-b184-b58d7adc612d)
+![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/03c1f549-12ef-4ee6-abb1-45a7f732f6ef)
 
 
 Następnie należało skopiować zaznaczony na poniższym zdjęciu fragment oraz wkleić go w rubryce "Server name" w aplikacji SQL Server Management Studio oraz zalogować się podając dane admina.
