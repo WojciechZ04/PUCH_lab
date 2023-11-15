@@ -9,11 +9,12 @@ Wojciech Zieliński
 W tym celu wykorzystano konto z domeną politechniki, na którym dodatkowo aktywowano darmową subskrypcję studencką. 
 
 #### Krok 2: Utworzenie bazy danych.
-Baza danych wraz z odpowiednimi zasobami została utworzona w oparciu o instrukcję do ćwiczenia oraz tutoriale dostępne na platformie YouTube.
+Baza danych wraz z odpowiednimi zasobami została utworzona w oparciu o instrukcję do ćwiczenia oraz tutoriale dostępne na platformie YouTube. W trakcie tworzenia bazy danych skorzystano z przykładowej bazy.
 
 #### Krok 3: Połączenie z bazą danych.
 W tym celu z poziomu strony głównej bazy danych, należało przejśc do przeglądu (1) oraz parametrów połączeń (2).  
-![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/409f180b-69e4-40ad-9529-c566a310cf85)
+![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/9d8080ec-5774-4965-b184-b58d7adc612d)
+
 
 Następnie należało skopiować zaznaczony na poniższym zdjęciu fragment oraz wkleić go w rubryce "Server name" w aplikacji SQL Server Management Studio oraz zalogować się podając dane admina.
 
