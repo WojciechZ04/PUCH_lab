@@ -26,4 +26,13 @@ Potem przekopiowano klucz dostępu i punkt końcowy oraz wklejono to pliku konfi
 ![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/ab78490f-66b8-4cd7-bd66-64732126f933)
 ![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/928d2863-c83d-45a0-9c32-3701e4f9d39d)
 
+```
+{
+  "AzureCognitiveServices": {
+    "BingSearchApiKey": "740a7cf0b45e4dedaf09264ddeff1dfc",
+    "BingSearchEndpoint": "https://azurecognitiveservicespuch.cognitiveservices.azure.com/"
+  }
+}
+```
+
 
