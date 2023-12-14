@@ -293,6 +293,7 @@ class Program
 ```
 
 Po uruchomieniu, aplikacja prosi o podanie tekstu, który ma zostać wypowiedziany.
+
 ![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/1a38a469-cc40-4faa-98f9-9a73612df6f3)
 
 W przypadku zmiany głosu który odczytuje nasz tekst wystarczy zamienić zmienną 
