@@ -425,4 +425,15 @@ Niestety nie udało mi się odczytać plików z dysku lokalnego oraz udostępnio
 
 
 
-Ćwiczenie: Tworzenie i Implementacja Chatbota z Azure QnA Maker
+### Ćwiczenie: Tworzenie i Implementacja Chatbota z Azure QnA Maker
+
+Niestety QnA Maker będzie zamykany i nie ma już możliwości tworzenia nowego zasobu.
+![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/66270bff-13e7-4a38-af74-413581e40f86)
+
+Jednak zostaję on częścią Azure AI service for Language, zatem spróbujemy w ten sposób.
+![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/c1becbcb-2100-4fdf-8d89-65b449f368f7)
+
+Skopiowano klucze:
+![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/0a5537b7-f271-4748-840b-9c37631eb789)
+
+I na tym się skończyło robienie postępów. Nastąpiły trudności ze stworzeniem programu obsługującym ten zasób, przez co nie udało się zaimplementować bazy wiedzy ani wykorzystać chatbota.
