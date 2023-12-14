@@ -414,6 +414,7 @@ W celu zweryfikowania aplikacji posłużono się dokumentem pdf udostępnionym w
 
 Program znalazł pary klucz-wartość. Kilka pierwszych:
 
+
 ![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/9f0634a0-a2ab-4a03-906e-d34e266e0d94)
 
 Program wykrył również tabelę i jej zawartość i przedstawił co znajduje się w której komórce:
@@ -421,3 +422,7 @@ Program wykrył również tabelę i jej zawartość i przedstawił co znajduje s
 ![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/31b51134-ce35-40d2-8f35-4235b3f5b728)
 
 Niestety nie udało mi się odczytać plików z dysku lokalnego oraz udostępnionych na Google Drive.
+
+
+
+Ćwiczenie: Tworzenie i Implementacja Chatbota z Azure QnA Maker
