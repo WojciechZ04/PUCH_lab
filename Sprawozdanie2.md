@@ -409,12 +409,15 @@ for (int i = 0; i < result.Tables.Count; i++)
 ```
 
 W celu zweryfikowania aplikacji posłużono się dokumentem pdf udostępnionym w internecie pod adresem: https://www.w3.org/WAI/WCAG21/working-examples/pdf-table/table.pdf
+
 ![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/dd15f482-e62e-4fd4-846f-e6ba661df0fb)
 
 Program znalazł pary klucz-wartość. Kilka pierwszych:
+
 ![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/9f0634a0-a2ab-4a03-906e-d34e266e0d94)
 
 Program wykrył również tabelę i jej zawartość i przedstawił co znajduje się w której komórce:
+
 ![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/31b51134-ce35-40d2-8f35-4235b3f5b728)
 
 Niestety nie udało mi się odczytać plików z dysku lokalnego oraz udostępnionych na Google Drive.
