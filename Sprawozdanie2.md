@@ -229,3 +229,73 @@ class Program
 Po uruchomieniu programu wyświetla się informacja żeby powiedzieć coś do mikrofonu.
 Po wypowiedzeniu zdania aplikacja się zatrzymuje oraz wyświetla wykryty tekst.
 ![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/27495f83-a566-47ed-9f2e-018ab0238108)
+
+Do konwersji tekstu na mowę utworzono nową aplikację, jednak korzysta ona z tych samych zasobów orach kluczy co aplikacja do konwersji mowy na tekst.
+Poniżej kod aplikacji.
+
+```
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using Microsoft.CognitiveServices.Speech;
+using Microsoft.CognitiveServices.Speech.Audio;
+
+class Program
+{
+    // This example requires environment variables named "SPEECH_KEY" and "SPEECH_REGION"
+    static string speechKey = Environment.GetEnvironmentVariable("SPEECH_KEY");
+    static string speechRegion = Environment.GetEnvironmentVariable("SPEECH_REGION");
+
+    static void OutputSpeechSynthesisResult(SpeechSynthesisResult speechSynthesisResult, string text)
+    {
+        switch (speechSynthesisResult.Reason)
+        {
+            case ResultReason.SynthesizingAudioCompleted:
+                Console.WriteLine($"Speech synthesized for text: [{text}]");
+                break;
+            case ResultReason.Canceled:
+                var cancellation = SpeechSynthesisCancellationDetails.FromResult(speechSynthesisResult);
+                Console.WriteLine($"CANCELED: Reason={cancellation.Reason}");
+
+                if (cancellation.Reason == CancellationReason.Error)
+                {
+                    Console.WriteLine($"CANCELED: ErrorCode={cancellation.ErrorCode}");
+                    Console.WriteLine($"CANCELED: ErrorDetails=[{cancellation.ErrorDetails}]");
+                    Console.WriteLine($"CANCELED: Did you set the speech resource key and region values?");
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    async static Task Main(string[] args)
+    {
+        var speechConfig = SpeechConfig.FromSubscription(speechKey, speechRegion);
+
+        // The language of the voice that speaks.
+        speechConfig.SpeechSynthesisVoiceName = "en-US-JennyNeural";
+
+        using (var speechSynthesizer = new SpeechSynthesizer(speechConfig))
+        {
+            // Get text from the console and synthesize to the default speaker.
+            Console.WriteLine("Enter some text that you want to speak >");
+            string text = Console.ReadLine();
+
+            var speechSynthesisResult = await speechSynthesizer.SpeakTextAsync(text);
+            OutputSpeechSynthesisResult(speechSynthesisResult, text);
+        }
+
+        Console.WriteLine("Press any key to exit...");
+        Console.ReadKey();
+    }
+}
+```
+
+Po uruchomieniu, aplikacja prosi o podanie tekstu, który ma zostać wypowiedziany.
+![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/1a38a469-cc40-4faa-98f9-9a73612df6f3)
+
+W przypadku zmiany głosu który odczytuje nasz tekst wystarczy zamienić zmienną 
+```
+speechConfig.SpeechSynthesisVoiceName = "es-ES-ElviraNeural";
+```
