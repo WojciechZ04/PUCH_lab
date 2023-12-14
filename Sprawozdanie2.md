@@ -226,5 +226,6 @@ class Program
     }
 }
 ```
-
-
+Po uruchomieniu programu wyświetla się informacja żeby powiedzieć coś do mikrofonu.
+Po wypowiedzeniu zdania aplikacja się zatrzymuje oraz wyświetla wykryty tekst.
+![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/27495f83-a566-47ed-9f2e-018ab0238108)
