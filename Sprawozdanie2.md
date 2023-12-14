@@ -300,3 +300,121 @@ W przypadku zmiany głosu który odczytuje nasz tekst wystarczy zamienić zmienn
 ```
 speechConfig.SpeechSynthesisVoiceName = "es-ES-ElviraNeural";
 ```
+
+
+### Ćwiczenie: Wprowadzenie do Azure Form Recognizer
+
+Ponownie należy dodać nowy zasób oraz go skonfigurować.
+![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/9c218cad-0fd5-47aa-a085-1795f46b4196)
+
+I pobrać klucze.
+![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/5e3f6a2e-6073-4d0c-86b4-10edc1294e79)
+
+Następnie nowy projekt w Visual Studio oraz pobrano odpowiednią paczkę z NuGet.
+![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/dbfc86e9-23d4-43b2-9d79-d2e94aa04bd4)
+
+Oraz utworzono aplikację następującym kodem:
+```
+using Azure;
+using Azure.AI.FormRecognizer.DocumentAnalysis;
+
+
+string endpoint = "https://formrecognizerpuch.cognitiveservices.azure.com/";
+string key = "18d13fd7006c4453b6ba2e4516c5512f";
+AzureKeyCredential credential = new AzureKeyCredential(key);
+DocumentAnalysisClient client = new DocumentAnalysisClient(new Uri(endpoint), credential);
+
+
+//sample document
+Uri fileUri = new Uri("https://www.w3.org/WAI/WCAG21/working-examples/pdf-table/table.pdf");
+
+AnalyzeDocumentOperation operation = await client.AnalyzeDocumentFromUriAsync(WaitUntil.Completed, "prebuilt-document", fileUri);
+
+AnalyzeResult result = operation.Value;
+
+Console.WriteLine("Detected key-value pairs:");
+
+foreach (DocumentKeyValuePair kvp in result.KeyValuePairs)
+{
+    if (kvp.Value == null)
+    {
+        Console.WriteLine($"  Found key with no value: '{kvp.Key.Content}'");
+    }
+    else
+    {
+        Console.WriteLine($"  Found key-value pair: '{kvp.Key.Content}' and '{kvp.Value.Content}'");
+    }
+}
+
+foreach (DocumentPage page in result.Pages)
+{
+    Console.WriteLine($"Document Page {page.PageNumber} has {page.Lines.Count} line(s), {page.Words.Count} word(s),");
+    Console.WriteLine($"and {page.SelectionMarks.Count} selection mark(s).");
+
+    for (int i = 0; i < page.Lines.Count; i++)
+    {
+        DocumentLine line = page.Lines[i];
+        Console.WriteLine($"  Line {i} has content: '{line.Content}'.");
+
+        Console.WriteLine($"    Its bounding box is:");
+        Console.WriteLine($"      Upper left => X: {line.BoundingPolygon[0].X}, Y= {line.BoundingPolygon[0].Y}");
+        Console.WriteLine($"      Upper right => X: {line.BoundingPolygon[1].X}, Y= {line.BoundingPolygon[1].Y}");
+        Console.WriteLine($"      Lower right => X: {line.BoundingPolygon[2].X}, Y= {line.BoundingPolygon[2].Y}");
+        Console.WriteLine($"      Lower left => X: {line.BoundingPolygon[3].X}, Y= {line.BoundingPolygon[3].Y}");
+    }
+
+    for (int i = 0; i < page.SelectionMarks.Count; i++)
+    {
+        DocumentSelectionMark selectionMark = page.SelectionMarks[i];
+
+        Console.WriteLine($"  Selection Mark {i} is {selectionMark.State}.");
+        Console.WriteLine($"    Its bounding box is:");
+        Console.WriteLine($"      Upper left => X: {selectionMark.BoundingPolygon[0].X}, Y= {selectionMark.BoundingPolygon[0].Y}");
+        Console.WriteLine($"      Upper right => X: {selectionMark.BoundingPolygon[1].X}, Y= {selectionMark.BoundingPolygon[1].Y}");
+        Console.WriteLine($"      Lower right => X: {selectionMark.BoundingPolygon[2].X}, Y= {selectionMark.BoundingPolygon[2].Y}");
+        Console.WriteLine($"      Lower left => X: {selectionMark.BoundingPolygon[3].X}, Y= {selectionMark.BoundingPolygon[3].Y}");
+    }
+}
+
+foreach (DocumentStyle style in result.Styles)
+{
+    // Check the style and style confidence to see if text is handwritten.
+    // Note that value '0.8' is used as an example.
+
+    bool isHandwritten = style.IsHandwritten.HasValue && style.IsHandwritten == true;
+
+    if (isHandwritten && style.Confidence > 0.8)
+    {
+        Console.WriteLine($"Handwritten content found:");
+
+        foreach (DocumentSpan span in style.Spans)
+        {
+            Console.WriteLine($"  Content: {result.Content.Substring(span.Index, span.Length)}");
+        }
+    }
+}
+
+Console.WriteLine("The following tables were extracted:");
+
+for (int i = 0; i < result.Tables.Count; i++)
+{
+    DocumentTable table = result.Tables[i];
+    Console.WriteLine($"  Table {i} has {table.RowCount} rows and {table.ColumnCount} columns.");
+
+    foreach (DocumentTableCell cell in table.Cells)
+    {
+        Console.WriteLine($"    Cell ({cell.RowIndex}, {cell.ColumnIndex}) has kind '{cell.Kind}' and content: '{cell.Content}'.");
+    }
+}
+```
+
+W celu zweryfikowania aplikacji posłużono się dokumentem pdf udostępnionym w internecie pod adresem: https://www.w3.org/WAI/WCAG21/working-examples/pdf-table/table.pdf
+![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/dd15f482-e62e-4fd4-846f-e6ba661df0fb)
+
+Program znalazł pary klucz-wartość. Kilka pierwszych:
+![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/9f0634a0-a2ab-4a03-906e-d34e266e0d94)
+
+Program wykrył również tabelę i jej zawartość i przedstawił co znajduje się w której komórce:
+![image](https://github.com/WojciechZ04/PUCH_lab/assets/120134082/31b51134-ce35-40d2-8f35-4235b3f5b728)
+
+Niestety nie udało mi się odczytać plików z dysku lokalnego oraz udostępnionych na Google Drive.
